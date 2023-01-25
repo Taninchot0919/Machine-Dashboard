@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="flex flex-col">
-      <MachineMonitor :machineData="machineData" class="pt-10" />
+      <MachineDashboard :machineData="machineData" class="pt-10" />
       <div class="flex justify-between px-36 mt-8">
         <button class="px-3 py-2 w-44 h-32 bg-slate-300 border border-black">
           Export Data to <span class="text-[#468e5e]">Google Sheet</span>
@@ -31,10 +31,10 @@
 
 <script>
 import Header from "../components/Header.vue";
-import MachineMonitor from "../components/MachineMonitor.vue";
+import MachineDashboard from "../components/MachineDashboard.vue";
 
 export default {
-  components: { Header, MachineMonitor },
+  components: { Header, MachineDashboard },
   data() {
     return {
       listOfMachines: [
