@@ -1,14 +1,20 @@
 <template>
   <div class="">
-    <Nuxt />
+    <Nuxt v-if="!isLoading" />
   </div>
 </template>
 
 <script>
 export default {
   name: "default",
-  mounted() {
-    console.log("mounted default layout");
+  data() {
+    return {
+      isLoading: true,
+    };
+  },
+  async mounted() {
+    await this.$store.dispatch("user/getUserDataFromLocalStorage");
+    this.isLoading = false;
   },
 };
 </script>
