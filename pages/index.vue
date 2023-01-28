@@ -40,16 +40,17 @@ export default {
   },
   methods: {
     async login() {
-      let result = await this.$axios.$post("http://localhost:3030/login", {
+      let result = await this.$axios.$post("/login", {
         username: this.username,
         password: this.password,
       });
       this.$store.dispatch("user/loginAction", result);
+      this.$router.push("/machine");
     },
   },
 
-  mounted() {
-    if (this.$store.dispatch("user/isUserLoggedIn")) {
+  async mounted() {
+    if (await this.$store.dispatch("user/isUserLoggedIn")) {
       this.$router.push("/machine");
     }
   },
