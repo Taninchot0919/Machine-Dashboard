@@ -15,7 +15,27 @@ const machine = {
           'Authorization': 'Bearer ' + this.$cookiz.get('machine_dashboard.accessToken')
         }
       })
-      machineData = machineData.machine_data
+      if (!machineData) {
+        throw new Error('Machine Not Found!')
+      }
+      machineData.machineValues = [
+        {
+          name: 'Now',
+          value: machineData.data.current_value
+        },
+        {
+          name: 'Yesterday',
+          value: machineData.data.day
+        },
+        {
+          name: 'Last Month',
+          value: machineData.data.month
+        },
+        {
+          name: 'Last Year',
+          value: machineData.data.year
+        }
+      ]
       return machineData
     }
   },
