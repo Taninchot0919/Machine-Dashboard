@@ -15,10 +15,18 @@
       <div
         v-for="machine in machines"
         :key="machine._id"
-        class="text-2xl border border-black h-[64px] flex items-center pl-[20px] cursor-pointer bg-white font-semibold hover:text-custom-blue-200 hover:border-custom-blue-200"
+        class="relative text-2xl border border-black h-[64px] flex items-center pl-[20px] cursor-pointer bg-white font-semibold hover:text-custom-blue-200 hover:border-custom-blue-200"
         @click="$router.push(`/machine/${machine._id}`)"
       >
-        {{ machine.machine_name }}
+        <div class="flex justify-between items-center">
+          <p>{{ machine.machine_name }}</p>
+          <div
+            class="absolute right-[15px] text-sm bg-yellow-200 h-[32px] flex items-center justify-center px-[10px] cursor-pointer hover:bg-yellow-300"
+            @click.stop="copyMachineAPI(machine._id)"
+          >
+            <p>Copy Machine API</p>
+          </div>
+        </div>
       </div>
     </div>
     <div v-if="machines.length == 0">
@@ -33,6 +41,7 @@
 import CreateMachine from "../../components/CreateMachine.vue";
 
 export default {
+  components: { CreateMachine },
   data() {
     return {
       username: null,
@@ -43,6 +52,11 @@ export default {
   methods: {
     closeModal() {
       this.isCreateMachine = false;
+    },
+    copyMachineAPI(machineId) {
+      navigator.clipboard.writeText(
+        `${process.env.API_URL}update-machine/${machineId}/:counter`
+      );
     },
   },
   async mounted() {
@@ -57,7 +71,6 @@ export default {
     );
     this.machines = machines;
   },
-  components: { CreateMachine },
 };
 </script>
 
