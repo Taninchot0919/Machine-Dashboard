@@ -5,7 +5,7 @@
     >
       <CloseButton
         class="absolute top-3 right-5 cursor-pointer"
-        @click.native="emitCloseModal"
+        @click.native="$emit('closeModal')"
       />
       <div class="flex flex-col items-center justify-center w-full h-full">
         <p class="text-2xl font-semibold">Create New Machine</p>

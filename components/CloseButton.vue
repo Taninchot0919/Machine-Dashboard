@@ -1,5 +1,9 @@
 <template>
-  <div class="rounded-full w-[32px] h-[32px] flex justify-center items-center text-white bg-slate-900">X</div>
+  <div
+    class="rounded-full w-[32px] h-[32px] flex justify-center items-center text-white bg-slate-900 cursor-pointer"
+  >
+    X
+  </div>
 </template>
 
 <script>
