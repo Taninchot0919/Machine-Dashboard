@@ -9,6 +9,14 @@ const machine = {
       })
       return machines
     },
+    async createMachine(store, payload) {
+      let machines = await this.$axios.$post('/create-machine', payload, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$cookiz.get('machine_dashboard.accessToken')
+        }
+      },)
+      return machines
+    },
     async getMachineData({ commit }, payload) {
       let machineData = await this.$axios.$get(`/get-machine/${payload}`, {
         headers: {
