@@ -20,12 +20,28 @@ jobs:
 
       - name: Create ENV File
         run: |
-          echo API_PATH=${{ secrets.API_URL }} >> .env 
-
+          echo API_URL=${{ secrets.API_URL }} >> .env
       - name: Build Docker Image
         run: docker build . --file Dockerfile --tag ghcr.io/taninchot0919/machine-dashboard-frontend:latest
 
       - name: Push Docker image to Github Container Registry
         run: docker push ghcr.io/taninchot0919/machine-dashboard-frontend:latest
 
-
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Login ssh to remote server and deploy container
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            docker ps
+            docker rm -f frontend
+            docker pull ghcr.io/taninchot0919/machine-dashboard-frontend:latest
+            docker images
+            docker-compose up -d frontend
+            docker image prune -f
+            docker ps -a
