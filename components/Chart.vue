@@ -7,7 +7,11 @@
         @click.native="$emit('closeModal')"
         class="absolute top-3 right-5"
       />
-      <BarChart :data="barChartData" :options="barChartOptions" />
+      <BarChart
+        :data="barChartData"
+        :options="barChartOptions"
+        class="w-full h-full"
+      />
     </div>
   </ModalLayout>
 </template>
@@ -25,24 +29,13 @@ export default {
   data() {
     return {
       barChartData: {
-        labels: [
-          "2019-06",
-          "2019-07",
-          "2019-08",
-          "2019-09",
-          "2019-10",
-          "2019-11",
-          "2019-12",
-          "2020-01",
-          "2020-02",
-          "2020-03",
-        ],
+        labels: this.chartDetails.data.labels,
         datasets: [
           {
             label: "Value",
-            data: [2, 1, 16, 3, 4, 5, 0, 0, 4, 12, 2],
-            backgroundColor: "rgba(20, 255, 0, 0.3)",
-            borderColor: "rgba(100, 255, 0, 1)",
+            data: this.chartDetails.data.values,
+            backgroundColor: "#c6e2ff",
+            borderColor: "#c6e2ff",
             borderWidth: 2,
           },
         ],
@@ -60,7 +53,7 @@ export default {
           fontColor: "#6b7280",
         },
         tooltips: {
-          backgroundColor: "#17BF62",
+          backgroundColor: "#3155ce",
         },
         scales: {
           xAxes: [

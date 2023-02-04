@@ -45,6 +45,18 @@ const machine = {
         }
       ]
       return machineData
+    },
+    async getChartData({ commit }, payload) {
+      let { machineId, findByCondition } = payload
+      let chartData = await this.$axios.$get(`/get-machine-history/${machineId}`, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$cookiz.get('machine_dashboard.accessToken')
+        },
+        params: {
+          find_by: findByCondition
+        }
+      })
+      return chartData
     }
   },
   mutations: {

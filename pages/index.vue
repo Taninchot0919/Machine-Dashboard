@@ -34,8 +34,8 @@ export default {
   name: "IndexPage",
   data() {
     return {
-      username: "test",
-      password: "testKubz",
+      username: "Taninchot",
+      password: "P@ssw0rd",
     };
   },
   methods: {

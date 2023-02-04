@@ -86,22 +86,32 @@ export default {
     },
 
     async showChartData(chartName) {
+      let findByCondition = "";
       switch (chartName) {
         case "Now":
           this.chartDetails.title = "Days";
+          findByCondition = "day";
           break;
         case "Yesterday":
           this.chartDetails.title = "Days";
+          findByCondition = "day";
           break;
         case "Last Month":
           this.chartDetails.title = "Months";
+          findByCondition = "month";
           break;
         case "Last Year":
           this.chartDetails.title = "Years";
+          findByCondition = "year";
           break;
         default:
           break;
       }
+      let chartData = await this.$store.dispatch("machine/getChartData", {
+        machineId: this.machineId,
+        findByCondition: findByCondition,
+      });
+      this.chartDetails.data = chartData;
       this.isShowChart = true;
     },
 
@@ -122,6 +132,7 @@ export default {
     }
     this.title = this.$store.state.user.userData.company_name;
     let machineId = this.$route.params.id;
+    this.machineId = machineId;
     this.machineData = await this.$store.dispatch(
       "machine/getMachineData",
       machineId
