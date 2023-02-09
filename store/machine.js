@@ -29,19 +29,19 @@ const machine = {
       machineData.machineValues = [
         {
           name: 'Now',
-          value: machineData.data.current_value
+          value: machineData.data.now_value
         },
         {
           name: 'Yesterday',
-          value: machineData.data.day
+          value: machineData.data.yesterday
         },
         {
           name: 'Last Month',
-          value: machineData.data.month
+          value: machineData.data.last_month
         },
         {
           name: 'Last Year',
-          value: machineData.data.year
+          value: machineData.data.last_year
         }
       ]
       return machineData
