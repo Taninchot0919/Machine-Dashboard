@@ -115,15 +115,17 @@ export default {
       this.isShowChart = true;
     },
 
-    // async readMachineData() {
-    //   setInterval(async () => {
-    //     this.machineData = await this.$store.dispatch(
-    //       "machine/getMachineData",
-    //       this.machineId
-    //     );
-    //     this.$forceUpdate();
-    //   }, 1000);
-    // },
+    async readMachineData() {
+      setInterval(async () => {
+        let result = await this.$store.dispatch(
+          "machine/getMachineNow",
+          this.machineId
+        );
+        this.machineData.machineValues[0].value =
+          result.data.machine_data.latest_value;
+        this.$forceUpdate();
+      }, 3000);
+    },
   },
 
   async mounted() {
@@ -138,7 +140,7 @@ export default {
       machineId
     );
     this.isLoading = false;
-    // await this.readMachineData();
+    await this.readMachineData();
   },
 };
 </script>

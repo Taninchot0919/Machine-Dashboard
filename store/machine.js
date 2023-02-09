@@ -57,6 +57,14 @@ const machine = {
         }
       })
       return chartData
+    },
+    async getMachineNow({ commit }, machineId) {
+      let machineNow = await this.$axios.$get(`/get-machine-now/${machineId}`, {
+        headers: {
+          'Authorization': 'Bearer ' + this.$cookiz.get('machine_dashboard.accessToken')
+        }
+      })
+      return machineNow
     }
   },
   mutations: {
