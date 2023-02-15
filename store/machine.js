@@ -2,27 +2,15 @@ const machine = {
   namespaced: true,
   actions: {
     async getMachines() {
-      let machines = await this.$axios.$get('/get-machine', {
-        headers: {
-          'Authorization': 'Bearer ' + this.$cookiz.get('machine_dashboard.accessToken')
-        }
-      })
+      let machines = await this.$axios.$get('/get-machine')
       return machines
     },
     async createMachine(store, payload) {
-      let machines = await this.$axios.$post('/create-machine', payload, {
-        headers: {
-          'Authorization': 'Bearer ' + this.$cookiz.get('machine_dashboard.accessToken')
-        }
-      },)
+      let machines = await this.$axios.$post('/create-machine', payload)
       return machines
     },
     async getMachineData({ commit }, payload) {
-      let machineData = await this.$axios.$get(`/get-machine/${payload}`, {
-        headers: {
-          'Authorization': 'Bearer ' + this.$cookiz.get('machine_dashboard.accessToken')
-        }
-      })
+      let machineData = await this.$axios.$get(`/get-machine/${payload}`)
       if (!machineData) {
         throw new Error('Machine Not Found!')
       }
@@ -49,9 +37,6 @@ const machine = {
     async getChartData({ commit }, payload) {
       let { machineId, findByCondition } = payload
       let chartData = await this.$axios.$get(`/get-machine-history/${machineId}`, {
-        headers: {
-          'Authorization': 'Bearer ' + this.$cookiz.get('machine_dashboard.accessToken')
-        },
         params: {
           find_by: findByCondition
         }
@@ -59,11 +44,7 @@ const machine = {
       return chartData
     },
     async getMachineNow({ commit }, machineId) {
-      let machineNow = await this.$axios.$get(`/get-machine-now/${machineId}`, {
-        headers: {
-          'Authorization': 'Bearer ' + this.$cookiz.get('machine_dashboard.accessToken')
-        }
-      })
+      let machineNow = await this.$axios.$get(`/get-machine-now/${machineId}`)
       return machineNow
     }
   },
