@@ -3,13 +3,13 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY . /usr/src/app
-RUN npm install
+RUN yarn install
 
 RUN ls -la /usr/src/app
-RUN npm run build
+RUN yarn build
 
 ENV HOST 0.0.0.0
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
