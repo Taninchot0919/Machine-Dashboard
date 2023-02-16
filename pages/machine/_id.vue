@@ -2,11 +2,30 @@
   <div class="h-screen bg-custom-blue-50">
     <Header :title="title" />
     <div class="px-[70px] pt-[70px]" v-if="!isLoading">
-      <p
-        class="border border-black rounded-[20px] text-[28px] bg-white w-[320px] h-[100px] flex justify-center items-center"
-      >
-        {{ machineData.data.machine_name }}
-      </p>
+      <div class="flex h-[100px] items-center">
+        <p
+          class="border border-black rounded-[20px] text-[28px] bg-white w-[320px] h-full flex justify-center items-center"
+        >
+          {{ machineData.data.machine_name }}
+        </p>
+        <div class="text-[20px] ml-4 flex items-center space-x-3">
+          <div
+            class="w-3 h-3 rounded-full bg-red-400"
+            :class="
+              machineData.data.machine_status == 'offline'
+                ? 'bg-red-400'
+                : 'bg-green-400'
+            "
+          ></div>
+          <p
+            v-if="machineData.data.machine_status == 'offline'"
+            class="text-red-400"
+          >
+            Offline
+          </p>
+          <p v-else class="text-green-400">Online</p>
+        </div>
+      </div>
       <div class="mt-[56px]">
         <p class="mb-[10px] text-xl">Date : {{ nowDate }}</p>
         <div class="flex justify-between">
@@ -44,12 +63,11 @@
 
 <script>
 import Header from "@/components/Header.vue";
-import MachineDashboard from "@/components/MachineDashboard.vue";
 import dayjs from "dayjs";
 import Chart from "../../components/Chart.vue";
 
 export default {
-  components: { Header, MachineDashboard, Chart },
+  components: { Header, Chart },
 
   data() {
     return {
