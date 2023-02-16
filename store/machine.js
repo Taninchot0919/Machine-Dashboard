@@ -46,6 +46,17 @@ const machine = {
     async getMachineNow({ commit }, machineId) {
       let machineNow = await this.$axios.$get(`/get-machine-now/${machineId}`)
       return machineNow
+    },
+    async updateMachine({ commit }, payload) {
+      let machine = await this.$axios.$patch(`/update-machine/${payload._id}`, {
+        machineName: payload.machine_name,
+        spreadSheetId: payload.spread_sheet_id,
+      })
+      return machine
+    },
+    async deleteMachine({ commit }, machineId) {
+      let machine = await this.$axios.$delete(`/update-machine/${machineId}`)
+      return machine
     }
   },
   mutations: {

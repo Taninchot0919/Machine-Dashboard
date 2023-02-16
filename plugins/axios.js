@@ -1,3 +1,5 @@
+import ErrorConstant from "../constants/ErrorConstant"
+
 export default function ({ $axios, store, app }) {
 
   $axios.onRequest(async (config) => {
@@ -11,9 +13,16 @@ export default function ({ $axios, store, app }) {
   $axios.onError(async (error) => {
     if (error.response) {
       let { data: errorData } = error.response
-      if (errorData.message == "jwt malformed") {
+      if (errorData.message == ErrorConstant.JWT_MALFORM) {
         await store.dispatch('user/logoutAction')
       }
+      if (errorData.code == 401) {
+        if (errorData.message == ErrorConstant.AUTH_HEADER_REQUIRED) {
+          await store.dispatch('user/logoutAction')
+        }
+      }
+      app.$toast.error(errorData.message)
+      throw new Error(errorData.message)
     }
   })
 }

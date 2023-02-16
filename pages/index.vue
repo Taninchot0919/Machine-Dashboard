@@ -40,10 +40,15 @@ export default {
   },
   methods: {
     async login() {
-      let result = await this.$axios.$post("/login", {
-        username: this.username,
-        password: this.password,
-      });
+      let result;
+      try {
+        result = await this.$axios.$post("/login", {
+          username: this.username,
+          password: this.password,
+        });
+      } catch (error) {
+        return;
+      }
       this.$store.dispatch("user/loginAction", result);
       this.$router.push("/machine");
     },
