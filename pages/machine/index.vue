@@ -55,7 +55,7 @@ export default {
     },
     copyMachineAPI(machineId) {
       navigator.clipboard.writeText(
-        `${process.env.API_URL}update-machine/${machineId}/:counter`
+        `${process.env.API_URL}/update-machine/${machineId}/:counter`
       );
     },
   },
