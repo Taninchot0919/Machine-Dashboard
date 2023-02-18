@@ -150,6 +150,7 @@ export default {
     if (!(await this.$store.dispatch("user/isUserLoggedIn"))) {
       this.$router.push("/");
     }
+    this.$store.dispatch("setIsCanGoBack", true);
     this.title = this.$store.state.user.userData.company_name;
     let machineId = this.$route.params.id;
     this.machineId = machineId;

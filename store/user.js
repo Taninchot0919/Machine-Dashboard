@@ -7,7 +7,7 @@ const user = {
     loginAction({ commit, dispatch }, payload) {
       this.$cookiz.set('machine_dashboard.accessToken', payload.accessToken, {
         path: '/',
-        maxAge: 60 * 60 * 24,
+        maxAge: 60 * 60 * 24 * 7, // 1 week
         secure: true,
       })
       delete payload.accessToken
@@ -50,6 +50,10 @@ const user = {
       state.userData = payload
     },
   },
-
+  getters: {
+    getUser(state) {
+      return state.userData
+    }
+  }
 }
 export default user
