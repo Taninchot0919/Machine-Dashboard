@@ -80,11 +80,11 @@ export default {
     },
   },
   async mounted() {
-    if (!this.$store.state.user) {
+    if (!this.$store.getters["user/getUser"]) {
       this.$router.push("/");
     }
-    let userData = this.$store.state.user.userData;
-    this.username = this.$store.state.user.userData.username;
+    let userData = this.$store.getters["user/getUser"];
+    this.username = userData.username;
     let { data: machines } = await this.$store.dispatch(
       "machine/getMachines",
       userData.company_id
