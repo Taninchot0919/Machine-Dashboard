@@ -20,13 +20,16 @@ const user = {
       await commit('SET_USER_DATA', null)
       location.replace("/")
     },
-    async getUserDataFromLocalStorage({ commit }, payload) {
+    async getUserDataFromLocalStorage({ commit, dispatch }, payload) {
       let userData = JSON.parse(localStorage.getItem('machine_dashboard.user'))
       if (userData) {
         let { _id: userId } = userData
         if (!userId) {
           localStorage.removeItem('machine_dashboard.user')
           return commit('SET_USER_DATA', null)
+        }
+        if (!this.$cookiz.get('machine_dashboard.accessToken')) {
+          await dispatch('logoutAction')
         }
         await commit('SET_USER_DATA', userData)
         return userData
