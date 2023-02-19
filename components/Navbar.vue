@@ -1,39 +1,52 @@
 <template>
   <div
     v-if="!isLoading && isUsersLoggedIn"
-    class="w-full h-10 flex items-center justify-between text-xl font-semibold px-10"
+    class="w-full h-20 flex items-center justify-between text-xl font-semibold px-10"
   >
     <div
-      class="w-full hover:text-custom-blue-200 cursor-pointer"
-      v-if="isCanGoBack"
-      @click="goBack"
+      class="hover:text-custom-blue-200 cursor-pointer"
+      @click="$router.push('/machine')"
     >
-      Back
+      <p>Machine Dashboard</p>
     </div>
-    <div class="w-full flex justify-end space-x-5">
+    <div class="flex justify-end space-x-5">
       <p
-        class="hover:text-custom-blue-200 cursor-pointer"
+        class="cursor-pointer hover:bg-custom-blue-100 px-3 py-2 rounded-[5px]"
         v-if="userData.role == 'admin'"
       >
         Add Member
       </p>
-      <p class="hover:text-custom-blue-200 cursor-pointer">
+      <p
+        class="cursor-pointer hover:bg-custom-blue-100 px-3 py-2 rounded-[5px]"
+        @click="isCreateMachine = true"
+      >
         Create New Machine
       </p>
-      <p class="hover:text-custom-blue-200 cursor-pointer" @click="logout">
+      <p
+        class="cursor-pointer hover:bg-custom-blue-100 px-3 py-2 rounded-[5px]"
+        @click="logout"
+      >
         Logout
       </p>
     </div>
+    <CreateMachine
+      v-if="isCreateMachine"
+      @closeModal="isCreateMachine = false"
+    />
   </div>
 </template>
 
 <script>
+import CreateMachine from "./CreateMachine.vue";
+
 export default {
   name: "Navbar",
+  components: { CreateMachine },
   data() {
     return {
       userData: null,
       isLoading: true,
+      isCreateMachine: false,
     };
   },
   methods: {

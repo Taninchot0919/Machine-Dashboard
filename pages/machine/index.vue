@@ -5,12 +5,6 @@
       <p class="text-2xl">
         สวัสดีคุณ <span class="font-bold">{{ username }}</span>
       </p>
-      <button
-        @click="isCreateMachine = true"
-        class="bg-custom-blue-200 font-bold text-white px-3 py-2 text-2xl rounded-[10px] w-[280px] h-[88px]"
-      >
-        Create new Machine
-      </button>
     </div>
     <div class="mt-[12px] space-y-3">
       <div
@@ -37,7 +31,6 @@
       <p>สร้าง Machine ของคุณเลย</p>
       <button @click="isCreateMachine = true">Create Machine</button>
     </div>
-    <CreateMachine v-if="isCreateMachine" @closeModal="closeModal" />
     <EditMachineModal
       v-if="isEditMachineModal"
       @closeModal="closeModal"

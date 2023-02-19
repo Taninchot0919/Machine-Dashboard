@@ -139,7 +139,6 @@ export default {
           "machine/getMachineNow",
           this.machineId
         );
-        console.log("🚀 ~ file: _id.vue:142 ~ setInterval ~ result", result);
         this.machineData.machineValues[0].value =
           result.data.machine_data.latest_value;
         this.machineData.data.machine_status = result.data.machine_status;
